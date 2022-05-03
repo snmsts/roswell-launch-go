@@ -1,15 +1,16 @@
+//go:build windows
 // +build windows
 
 package main
 
 import (
 	"github.com/snmsts/roswell-launch-go/pkg/pwd"
-	"os"
 	"log"
+	"os"
 )
 
 func Systemhomedir() string {
-	ret,err := pwd.ProfileFolder()
+	ret, err := pwd.ProfileFolder()
 	if err != nil {
 		log.Fatal(err)
 	}

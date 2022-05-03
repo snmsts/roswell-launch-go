@@ -3,9 +3,9 @@
 package pwd
 
 import (
+	"strings"
 	"syscall"
 	"unsafe"
-	"strings"
 )
 
 type GUID struct {
