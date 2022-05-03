@@ -1,27 +1,19 @@
-// +build !windows
+// +build windows
 
 package main
 
 import (
 	"github.com/snmsts/roswell-launch-go/pkg/pwd"
 	"os"
+	"log"
 )
 
 func Systemhomedir() string {
-	user := os.Getenv("SUDO_USER")
-	uid := os.Getuid()
-	var pw *pwd.Passwd
-
-	if user != "" && uid == 0 {
-		pw = pwd.Getpwnam(user)
-	} else {
-		pw = pwd.Getpwuid(uint32(uid))
+	ret,err := pwd.ProfileFolder()
+	if err != nil {
+		log.Fatal(err)
 	}
-	if pw == nil {
-		return ""
-	}
-	//fmt.Print("homedir is'",pw.Dir,"' and SUDO user is'",user,"'\n")
-	return pw.Dir
+	return ret
 }
 
 func HomeDir() string {
