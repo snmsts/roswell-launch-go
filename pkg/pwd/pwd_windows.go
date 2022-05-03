@@ -3,6 +3,7 @@
 package pwd
 
 import (
+	"log"
 	"strings"
 	"syscall"
 	"unsafe"
@@ -49,4 +50,12 @@ func ProfileFolder() (string, error) {
 	folder := syscall.UTF16ToString((*[1 << 16]uint16)(unsafe.Pointer(path))[:])
 	str := strings.Replace(folder, "\\", "/", -1)
 	return str, nil
+}
+
+func Systemhomedir() string {
+	ret, err := ProfileFolder()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return ret
 }

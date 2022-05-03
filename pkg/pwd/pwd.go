@@ -10,6 +10,7 @@ package pwd
 import "C"
 
 import (
+	"os"
 	"sync"
 	"unsafe"
 )
@@ -60,4 +61,21 @@ func Getpwuid(uid uint32) *Passwd {
 	mu.Lock()
 	defer mu.Unlock()
 	return newPasswdFromC(C.getpwuid(C.uint(uid)))
+}
+
+func Systemhomedir() string {
+	user := os.Getenv("SUDO_USER")
+	uid := os.Getuid()
+	var pw *Passwd
+
+	if user != "" && uid == 0 {
+		pw = Getpwnam(user)
+	} else {
+		pw = Getpwuid(uint32(uid))
+	}
+	if pw == nil {
+		return ""
+	}
+	//fmt.Print("homedir is'",pw.Dir,"' and SUDO user is'",user,"'\n")
+	return pw.Dir
 }
