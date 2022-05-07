@@ -6,10 +6,10 @@ import (
 )
 
 func init() {
-	Impl_map["sbcl"] = Launch_sbcl
+	Impl_map["sbcl"] = sbcl
 }
 
-func Launch_sbcl(config map[string]string, args []string) {
+func sbcl(config map[string]string, args []string) {
 	bin_path := HomeDir()
 	bin_path += "/" + "impls"
 	bin_path += "/" + UnameM() // x86-64
