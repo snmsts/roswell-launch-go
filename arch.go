@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os/exec"
+	"runtime"
 	"strings"
 )
 
@@ -12,13 +13,19 @@ func UnameS() string {
 	if unames != "" {
 		return unames
 	}
+	str := ""
 
-	out, err := exec.Command("uname", "-s").Output()
-	if err != nil {
-		log.Fatal(err)
+	if runtime.GOOS == "windows" {
+		str = "windows"
+	} else {
+		out, err := exec.Command("uname", "-s").Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+		str = string(out)
+		str = strings.Trim(str, "\n")
 	}
-	str := string(out)
-	str = strings.Trim(str, "\n")
+
 	if str == "SunOS" {
 		str = "solaris"
 	} else {
@@ -34,12 +41,18 @@ func UnameM() string {
 	if unamem != "" {
 		return unamem
 	}
-	out, err := exec.Command("uname", "-m").Output()
-	if err != nil {
-		log.Fatal(err)
+	str := ""
+
+	if runtime.GOOS == "windows" {
+		str = "x86-64"
+	} else {
+		out, err := exec.Command("uname", "-m").Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+		str = string(out)
+		str = strings.Trim(str, "\n")
 	}
-	str := string(out)
-	str = strings.Trim(str, "\n")
 	if str == "i86pc" {
 		str = "x86-64"
 	} else if str == "i686" {
