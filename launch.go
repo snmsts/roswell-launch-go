@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+var Impl_map = make(map[string]func(config map[string]string, args []string))
+
 func Launch(config map[string]string, args []string) {
 	var program string
 	_, file := path.Split(args[0])
@@ -15,8 +17,8 @@ func Launch(config map[string]string, args []string) {
 	} else {
 		program = file
 	}
-	if program == "sbcl" {
-		Launch_sbcl(config, args)
+	if Impl_map[program] != nil {
+		Impl_map[program](config, args)
 	} else {
 		os.Exit(1)
 	}

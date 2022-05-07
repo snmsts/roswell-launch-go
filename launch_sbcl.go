@@ -5,6 +5,10 @@ import (
 	"runtime"
 )
 
+func init() {
+	Impl_map["sbcl"] = Launch_sbcl
+}
+
 func Launch_sbcl(config map[string]string, args []string) {
 	bin_path := HomeDir()
 	bin_path += "/" + "impls"
