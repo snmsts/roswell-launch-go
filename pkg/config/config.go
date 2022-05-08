@@ -1,12 +1,13 @@
-package main
+package config
 
 import (
 	"encoding/csv"
+	"github.com/snmsts/roswell-launch-go/pkg/pwd"
 	"io"
 	"os"
 )
 
-func Parseconfig(fileName string) map[string]string {
+func Parse(fileName string) map[string]string {
 	result := make(map[string]string)
 	fp, err := os.Open(fileName)
 	if err != nil {
@@ -27,4 +28,10 @@ func Parseconfig(fileName string) map[string]string {
 		result[record[0]] = record[2]
 	}
 	return result
+}
+
+func Path() string {
+	path := pwd.HomeDir()
+	path = path + "/config"
+	return path
 }
