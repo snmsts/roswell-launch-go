@@ -9,7 +9,7 @@ import (
 
 var unames = ""
 
-func UnameS() string {
+func OS() string {
 	if unames != "" {
 		return unames
 	}

@@ -9,7 +9,7 @@ import (
 
 var unamem = ""
 
-func UnameM() string {
+func CPU() string {
 	if unamem != "" {
 		return unamem
 	}
