@@ -2,3 +2,5 @@ roswell-launch-go
 roswell-launch-go.exe
 sbcl
 sbcl.exe
+ccl
+ccl.exe

@@ -17,7 +17,7 @@ func sbcl(config map[string]string) {
 	bin_path := pwd.HomeDir()
 	bin_path += "/" + "impls"
 	bin_path += "/" + arch.CPU() // x86-64
-	bin_path += "/" + arch.OS() // darwin
+	bin_path += "/" + arch.OS()  // darwin
 	bin_path += "/" + "sbcl-bin"
 	bin_path += "/" + config["sbcl-bin.version"]
 	bin_path += "/" + "bin"
